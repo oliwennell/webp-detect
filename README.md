@@ -49,8 +49,19 @@ This means that if you're setting image URLs via styling, you can use the classe
 
 For `img` tags where you have a .webp and a .png to fall-back to, you can use the alternative attributes:
 ```html
-<!-- Use cat.webp if a browser supports animated WebP. 
-Fall-back to cat.png when it doesn't. This assumes cat.png exists in the same directory as the .webp version. -->
-<img webp-animation-src="img/cat.webp" /> 
+<!-- Original markup -->
+<img webp-animation-src="img/dog.webp" />
+````
+
+After webp-detect has initialised:
+
+````html
+<!-- When animated WebP is supported -->
+<img src="img/dog.webp" />
 ```
 
+
+````html
+<!-- Fall-back to .png equivalent when animated WebP is NOT supported -->
+<img src="img/dog.png" />
+```
