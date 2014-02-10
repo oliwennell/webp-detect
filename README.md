@@ -53,13 +53,12 @@ For `img` tags where you have a .webp and a .png to fall-back to, you can use th
 <img webp-animation-src="img/dog.webp" />
 ````
 
-After webp-detect has initialised:
+The markup will then be changed by webp-detect as follows:
 
 ````html
 <!-- When animated WebP is supported -->
 <img src="img/dog.webp" />
 ```
-
 
 ````html
 <!-- Fall-back to .png equivalent when animated WebP is NOT supported -->
