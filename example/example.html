@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="../build/webp-detect.min.js"></script>
+    </head>
+
+    <img webp-lossless-src="test.webp" />
+    <img src="test2.png" />
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            WebpDetect.init();
+        });
+    </script>
+</html>
