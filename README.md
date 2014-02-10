@@ -4,7 +4,7 @@ webp-detect
 What it is
 ----------
 
-JS code that detects WebP support and makes it easier to efficiently fall-back to .png in browsers that don't support it.
+JavaScript code that detects WebP support and makes it easier to efficiently fall-back to .png in browsers that don't support it.
 
 Setup
 -----
