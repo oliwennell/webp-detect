@@ -9,7 +9,7 @@ JS code that detects WebP support and makes it easier to efficiently fall-back t
 Setup
 -----
 
-Initialise web-detect when your page is ready:
+Initialise webp-detect when your page is ready:
 ```javascript
 $(document).ready(function () {
   WebpDetect.init();
@@ -19,7 +19,7 @@ $(document).ready(function () {
 How to use
 ----------
 
-As browsers have different levels of support, the code detects whether the following features are supported:
+The code checks whether the browser supports the following WebP features:
 * lossy
 * lossless
 * alpha
@@ -28,18 +28,22 @@ As browsers have different levels of support, the code detects whether the follo
 Classes will be added to the page's `html` element to indicate what's supported. In the example below, lossy and lossless images are supported but alpha and animation are not:
 
 ```html
-<html class="webp-lossy webp-lossless no-webp-lossy no-webp-animation">
+<html class="webp-lossy webp-lossless no-webp-alpha no-webp-animation">
   ...
 ```
 
 This means that if you're setting image URLs via styling, you can use the classes to switch between a .webp and its fallback:
 
-```css
-.web-lossless {
-  background: url('img/cat.webp');
-}
-.no-webp-lossless {
-  background: url('img/cat.png');
+```scss
+// Example SASS
+.lolcat {
+  width: 100%;
+  .web-lossless {
+    background: url('img/cat.webp');
+  }
+  .no-webp-lossless {
+    background: url('img/cat.png');
+  }
 }
 ```
 
