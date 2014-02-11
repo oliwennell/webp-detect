@@ -8,8 +8,8 @@ JavaScript code that detects WebP support and makes it easier to efficiently fal
 
 Setup
 -----
-
-Initialise webp-detect when your page is ready:
+* jQuery is required (tested with version 1.11.0)
+* Initialise webp-detect when your page is ready:
 ```javascript
 $(document).ready(function () {
   WebpDetect.init();
