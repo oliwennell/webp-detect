@@ -6,6 +6,9 @@ What it is
 
 JavaScript code that detects WebP support and makes it easier to efficiently fall-back to .png in browsers that don't support it.
 
+Code inspired by Google's example on their WebP FAQ:
+https://developers.google.com/speed/webp/faq#how_can_i_detect_browser_support_using_javascript
+
 Setup
 -----
 * jQuery is required (tested with version 1.11.0)
