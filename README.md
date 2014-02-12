@@ -12,6 +12,7 @@ https://developers.google.com/speed/webp/faq#how_can_i_detect_browser_support_us
 Setup
 -----
 * jQuery is required (tested with version 1.11.0)
+* Reference web-detect.min.js in your head.
 * Initialise webp-detect when your page is ready:
 ```javascript
 $(document).ready(function () {
