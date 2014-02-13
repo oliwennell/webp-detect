@@ -1,16 +1,79 @@
 <html>
     <head>
         <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-        <script src="../build/webp-detect.min.js"></script>
+        <script type="text/javascript" src="../build/webp-detect.min.js"></script>
+
+        <style>
+
+            .preview-container {
+                display: table;
+                border-spacing: 5px;
+            }
+
+            .preview {
+                display: table-cell;
+                width: 400px;
+                height: 300px;
+                border: 1px solid black;
+            }
+
+            .webp-lossy .lossy-example {
+                background-image: url(lossy.webp);  
+                content: "lossy webp";
+            }
+            .no-webp-lossy .lossy-example {
+                background-image: url(no-alpha.png); 
+                content: "no lossy webp, png fallback";
+            }
+            
+            .webp-lossless .lossless-example {
+                background-image: url(lossless.webp);  
+                content: "lossless webp";
+            }
+            .no-webp-lossless .lossless-example {
+                background-image: url(no-alpha.png);  
+                content: "no lossless webp, png fallback";            
+            }
+
+             .webp-alpha .lossy-alpha-example{
+                background-image: url(lossy-alpha.webp);
+                content: "lossy alpha webp";                  
+            }
+             .no-webp-alpha .lossy-alpha-example {
+                background-image: url(alpha.png);  
+                content: "no alpha webp, png fallback";            
+            }
+
+             .webp-alpha .lossless-alpha-example{
+                background-image: url(lossless-alpha.webp);
+                content: "lossless alpha webp";                  
+            }
+             .no-webp-alpha .lossless-alpha-example {
+                background-image: url(alpha.png);  
+                content: "no alpha webp, png fallback";            
+            }
+
+        </style>
     </head>
-
-    <img webp-lossless-src="test.webp" />
-    <img src="test2.png" />
-
+    <body>
+        <div class="preview-container">
+            <div class="preview lossy-example">&nbsp;</div>
+            <div class="preview lossless-example">&nbsp;</div>
+            <div class="preview lossy-alpha-example">&nbsp;</div>
+            <div class="preview lossless-alpha-example">&nbsp;</div>
+        </div>
+    </body>
     <script type="text/javascript">
 
         $(document).ready(function () {
-            WebpDetect.init();
+
+            WebpDetect.init({ 
+                onComplete: function () {
+                    $('.preview').each(function (index, item) {
+                        $(item).html("<span>" + $(this).css('content') + "</span>");
+                    });
+                }
+            });
         });
     </script>
 </html>

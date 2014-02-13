@@ -1,14 +1,17 @@
 
 var WebpDetect = function() {
 
-    var testFeatureSupport = function(feature, callback) {
+    var onComplete = null;
 
-        var testImages = {
-            lossy: "UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA",
-            lossless: "UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==",
-            alpha: "UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA==",
-            animation: "UklGRlIAAABXRUJQVlA4WAoAAAASAAAAAAAAAAAAQU5JTQYAAAD/////AABBTk1GJgAAAAAAAAAAAAAAAAAAAGQAAABWUDhMDQAAAC8AAAAQBxAREYiI/gcA"
-        };
+    var numFeaturesTested = 0;
+    var features = [
+        { name: 'lossy', testImage: "UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA" },
+        { name: 'lossless', testImage: "UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==" },
+        { name: 'alpha', testImage: "UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA==" },
+        { name: 'animation', testImage: "UklGRlIAAABXRUJQVlA4WAoAAAASAAAAAAAAAAAAQU5JTQYAAAD/////AABBTk1GJgAAAAAAAAAAAAAAAAAAAGQAAABWUDhMDQAAAC8AAAAQBxAREYiI/gcA" }
+    ];
+
+    var testFeatureSupport = function(feature, callback) {
 
         var image = new Image();
 
@@ -21,12 +24,12 @@ var WebpDetect = function() {
             callback(feature, false);
         };
 
-        image.src = "data:image/webp;base64," + testImages[feature];
+        image.src = "data:image/webp;base64," + feature.testImage;
     }
 
     var onFeatureTested = function(feature, isSupported) {
-
-        var featureClass = (!isSupported ? 'no-' : '') + 'webp-' + feature;
+        
+        var featureClass = (!isSupported ? 'no-' : '') + 'webp-' + feature.name;
         $('html').addClass(featureClass);
 
         var featureAttribute = featureClass + '-src';
@@ -39,14 +42,22 @@ var WebpDetect = function() {
 
             $(item).attr('src', imageSource || "");
         });
+
+        if (onComplete) {
+            numFeaturesTested++;
+            if (numFeaturesTested == features.length) {
+                onComplete();
+            }
+        }
     }
 
     return {
-        init: function () {
-            testFeatureSupport('lossy', onFeatureTested);
-            testFeatureSupport('lossless', onFeatureTested);
-            testFeatureSupport('alpha', onFeatureTested);
-            testFeatureSupport('animation', onFeatureTested);
+        init: function (parameters) {
+            onComplete = parameters && parameters.onComplete;
+
+            for (var index = 0; index < features.length; ++index) {
+                testFeatureSupport(features[index], onFeatureTested);
+            }
         }
     }
 }();
